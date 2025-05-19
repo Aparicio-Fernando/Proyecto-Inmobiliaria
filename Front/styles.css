@@ -1,0 +1,69 @@
+ .property-card {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+
+        .property-image {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .property-description {
+            flex: 1;
+            padding: 0 1rem;
+        }
+
+        .property-price {
+            font-weight: bold;
+            font-size: 1.2rem;
+            white-space: nowrap;
+        }
+
+        body {
+            background-color: #20c997;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1;
+        }
+
+        /* Fondo verde del dropdown */
+    .custom-dropdown {
+        background-color: #36a838;
+        border: 1px solid black;
+        min-width: 180px;
+    }
+
+    /* Estilo para cada item */
+    .custom-dropdown-item {
+        color: white;
+        border-bottom: 1px solid black;
+    }
+
+    /* Evitar borde extra en el último item */
+    .custom-dropdown-item:last-child {
+        border-bottom: none;
+    }
+
+    /* Hover claro para mejor visibilidad */
+    .custom-dropdown-item:hover {
+        background-color: #2e8d30;
+    }
