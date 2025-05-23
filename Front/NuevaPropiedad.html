@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="/Front/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg" style="background-color: #36a838;">
+        <div class="container py-3">
+            <!-- Logo o nombre del sitio -->
+            <a class="navbar-brand text-white fw-bold" href="/Front/Index.html">
+                <img src="/Front/Imagenes/logo2.png" alt="Logo" style="height: 60px; width: auto;">
+            </a>
+
+            <!-- Botón responsive -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Menú -->
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ms-auto">
+                    <!-- Dropdown Ventas -->
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white fw-semibold" href="#" id="ventasDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Propiedades
+                        </a>
+                        <ul class="dropdown-menu custom-dropdown" aria-labelledby="ventasDropdown">
+                            <li><a class="dropdown-item custom-dropdown-item" href="/Front/_ListaPropiedades.html">Ver
+                                    propiedades</a></li>
+                            <li><a class="dropdown-item custom-dropdown-item" href="/Front/NuevaPropiedad.html">Cargar
+                                    propiedades</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Otros enlaces -->
+                    <a class="nav-link text-white fw-semibold ms-3" href="#">Alquileres</a>
+                    <a class="nav-link text-white fw-semibold ms-3" href="#">Contacto</a>
+                    <a class="nav-link text-white fw-semibold ms-3" href="#">Sobre nosotros</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="col-md-12" style="margin-left: 2rem;">
+        <h5>
+            <span>
+                Agregar nueva propiedad
+            </span>
+        </h5>
+    </div>
+    <div class="row form-default" style="margin: 2rem;">
+        <ul class="nav nav-tabs" id="propertyTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="owner-tab" data-bs-toggle="tab" data-bs-target="#owner"
+                    type="button" role="tab">Propietario</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="property-tab" data-bs-toggle="tab" data-bs-target="#property" type="button"
+                    role="tab">Propiedad</button>
+            </li>
+        </ul>
+        <form class="col-sm-12 border p-4 bg-white" >
+            <div class="tab-content mt-3" id="propertyTabsContent">
+                <!-- TAB 1: Propietario -->
+                <div class="tab-pane fade show active" id="owner" role="tabpanel">
+                    <div class="col-md-12">
+                        <div class="col-md-3" style="display: flex; align-items: center;">
+                            <div class="col-md-2">
+                                <label for="">Apellido: </label>
+                            </div>
+                            <input class="form-control" placeholder="Apellido">
+                        </div>
+
+                        <div class="col-md-3"><input class="form-control" placeholder="Nombre"></div>
+                        <div class="col-md-3"><input class="form-control" placeholder="DNI"></div>
+                        <div class="col-md-3"><input class="form-control" placeholder="CUIL"></div>
+                        <div class="col-md-4"><input class="form-control" placeholder="Teléfono"></div>
+                        <div class="col-md-8"><input class="form-control" type="email" placeholder="Email"></div>
+                        <div class="col-md-5"><input class="form-control" placeholder="Calle"></div>
+                        <div class="col-md-2"><input class="form-control" placeholder="Número"></div>
+                        <div class="col-md-5"><input class="form-control" placeholder="Barrio"></div>
+                        <div class="col-md-3"><input class="form-control" placeholder="Código Postal"></div>
+                        <div class="col-md-5"><input class="form-control" placeholder="Localidad"></div>
+                        <div class="col-md-4"><input class="form-control" placeholder="Provincia"></div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: Propiedad -->
+                <div class="tab-pane fade" id="property" role="tabpanel">
+                    <div class="row g-3">
+                        <div class="col-md-4"><input class="form-control" placeholder="Provincia"></div>
+                        <div class="col-md-4"><input class="form-control" placeholder="Localidad"></div>
+                        <div class="col-md-4"><input class="form-control" placeholder="Barrio"></div>
+                        <div class="col-md-4"><input class="form-control" placeholder="Manzana"></div>
+                        <div class="col-md-4"><input class="form-control" placeholder="Calle"></div>
+                        <div class="col-md-4"><input class="form-control" placeholder="Altura"></div>
+                        <div class="col-md-6"><input class="form-control" placeholder="Descripción corta"></div>
+                        <div class="col-md-6"><textarea class="form-control" placeholder="Descripción larga"></textarea>
+                        </div>
+                        <div class="col-md-4"><input class="form-control" placeholder="Precio" type="number" min="0">
+                        </div>
+                        <div class="col-md-4"><input class="form-control" placeholder="Cantidad de ambientes"
+                                type="number" min="1"></div>
+                        <div class="col-md-4">
+                            <select class="form-select">
+                                <option selected>Estado</option>
+                                <option>Disponible</option>
+                                <option>Reservado</option>
+                                <option>Vendido</option>
+                            </select>
+                        </div>
+                        <div class="col-md-5">
+                            <label class="form-label">Imágenes (puedes subir varias):</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Archivo" maxlength="100"
+                                    id="file-path" disabled>
+                                <button type="button" class="btn btn-outline-secondary" id="file-browser">
+                                    <i class="bi bi-paperclip">Seleccionar</i>
+                                </button>
+                                <input type="file" id="real-file" style="display: none;" multiple>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-end mt-4">
+                    <button type="submit" class="btn btn-success">Guardar propiedad</button>
+                </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.getElementById('file-browser').addEventListener('click', function () {
+            document.getElementById('real-file').click();
+        });
+
+        document.getElementById('real-file').addEventListener('change', function () {
+            const input = document.getElementById('file-path');
+            const files = Array.from(this.files).map(f => f.name).join(', ');
+            input.value = files || "Sin archivos seleccionados";
+        });
+    </script>
+
+</body>
+
+</html>

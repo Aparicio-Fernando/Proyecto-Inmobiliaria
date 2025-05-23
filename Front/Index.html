@@ -28,143 +28,54 @@
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white fw-semibold" href="#" id="ventasDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Ventas
+                            Propiedades
                         </a>
                         <ul class="dropdown-menu custom-dropdown" aria-labelledby="ventasDropdown">
-                            <li><a class="dropdown-item custom-dropdown-item" href="#">Terreno</a></li>
-                            <li><a class="dropdown-item custom-dropdown-item" href="#">Vivienda</a></li>
-                            <li><a class="dropdown-item custom-dropdown-item" href="#">Departamento</a></li>
+                            <li><a class="dropdown-item custom-dropdown-item" href="/Front/_ListaPropiedades.html">Ver propiedades</a></li>
+                            <li><a class="dropdown-item custom-dropdown-item" href="/Front/NuevaPropiedad.html">Cargar propiedades</a></li>
                         </ul>
                     </div>
 
                     <!-- Otros enlaces -->
                     <a class="nav-link text-white fw-semibold ms-3" href="#">Alquileres</a>
-                    <a class="nav-link text-white fw-semibold ms-3" href="#">Registrate</a>
                     <a class="nav-link text-white fw-semibold ms-3" href="#">Contacto</a>
                     <a class="nav-link text-white fw-semibold ms-3" href="#">Sobre nosotros</a>
                 </div>
             </div>
         </div>
     </nav>
-
-    <div class="container my-4">
-
-        <!-- Filtro -->
-        <div class="row mb-4">
-            <div class="col-md-4">
-                <input type="text" class="form-control" placeholder="Buscar por ubicación o tipo">
+    <main>
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
             </div>
-            <div class="col-md-2">
-                <select class="form-select">
-                    <option value="">Tipo</option>
-                    <option>Casa</option>
-                    <option>Departamento</option>
-                    <option>Terreno</option>
-                </select>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/Front/Imagenes/1.jpg" class="d-block w-100" alt="Casa 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="/Front/Imagenes/2.jpg" class="d-block w-100" alt="Casa 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="/Front/Imagenes/3.jpg" class="d-block w-100" alt="Casa 3">
+                </div>
             </div>
-            <div class="col-md-2">
-                <select class="form-select">
-                    <option value="">Precio máx.</option>
-                    <option>$50,000</option>
-                    <option>$100,000</option>
-                    <option>$200,000</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <select class="form-select">
-                    <option value="">Cantidad de habitaciones</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5+</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <button class="btn btn-primary w-100">Filtrar</button>
-            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
         </div>
-
-        <!-- Cards de propiedades -->
-        <div class="property-card">
-            <img src="/Front/Imagenes/1.jpg" class="property-image" alt="Casa">
-            <div class="property-description">
-                <h5>Casa en Rio Ceballos</h5>
-                <p>3 habitaciones · 2 baños · 150 m²</p>
-            </div>
-            <div class="property-price text-end text-success">
-                $120,000
-            </div>
-        </div>
-
-        <div class="property-card">
-            <img src="/Front/Imagenes/2.jpg" class="property-image" alt="Departamento">
-            <div class="property-description">
-                <h5>Casa en Villa Los Altos</h5>
-                <p>2 habitaciones · 1 baño · 85 m²</p>
-            </div>
-            <div class="property-price text-end text-success">
-                $95,000
-            </div>
-        </div>
-
-        <div class="property-card">
-            <img src="/Front/Imagenes/3.jpg" class="property-image" alt="Departamento">
-            <div class="property-description">
-                <h5>Departamento Nova Housings</h5>
-                <p>2 habitaciones · 1 baño · 85 m²</p>
-            </div>
-            <div class="property-price text-end text-success">
-                $95,000
-            </div>
-        </div>
-
-        <div class="property-card">
-            <img src="/Front/Imagenes/4.jpg" class="property-image" alt="Departamento">
-            <div class="property-description">
-                <h5>Casa Categril</h5>
-                <p>2 habitaciones · 1 baño · 85 m²</p>
-            </div>
-            <div class="property-price text-end text-success">
-                $95,000
-            </div>
-        </div>
-
-        <div class="property-card">
-            <img src="/Front/Imagenes/5.jpg" class="property-image" alt="Departamento">
-            <div class="property-description">
-                <h5>Casa en La Quebrada </h5>
-                <p>2 habitaciones · 1 baño · 85 m²</p>
-            </div>
-            <div class="property-price text-end text-success">
-                $95,000
-            </div>                    
-        </div>
-
-        <!-- Puedes repetir más cards con tus propios datos -->
-
-    </div>
-
-     <!-- Paginación -->
-    <nav aria-label="Paginación de propiedades">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link">Anterior</a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">Siguiente</a>
-            </li>
-        </ul>
-    </nav>
+    </main>
+    
     <!-- Footer -->
     <footer class="bg-dark text-light py-4 mt-5">
         <div class="container">

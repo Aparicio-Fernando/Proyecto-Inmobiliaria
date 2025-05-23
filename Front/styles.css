@@ -1,69 +1,80 @@
- .property-card {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #fff;
-        }
+/* ============================================================
+   ESTILOS GENERALES
+============================================================ */
+html,
+body {
+    height: 100%;
+}
 
-        .property-image {
-            width: 150px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
+body {
+    background-color: #20c997;
+    display: flex;
+    flex-direction: column;
+}
 
-        .property-description {
-            flex: 1;
-            padding: 0 1rem;
-        }
+/* El main se expande para mantener el footer abajo */
+main {
+    flex: 1;
+}
 
-        .property-price {
-            font-weight: bold;
-            font-size: 1.2rem;
-            white-space: nowrap;
-        }
+/* ============================================================
+   TARJETAS DE PROPIEDADES
+============================================================ */
+.property-card {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+}
 
-        body {
-            background-color: #20c997;
-        }
+.property-image {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+}
 
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-        }
+.property-description {
+    flex: 1;
+    padding: 0 1rem;
+}
 
-        body {
-            display: flex;
-            flex-direction: column;
-        }
+.property-price {
+    font-weight: bold;
+    font-size: 1.2rem;
+    white-space: nowrap;
+}
 
-        .container {
-            flex: 1;
-        }
+/* ============================================================
+   DROPDOWN PERSONALIZADO (NAVBAR)
+============================================================ */
+.custom-dropdown {
+    background-color: #36a838;
+    border: 1px solid black;
+    min-width: 180px;
+}
 
-        /* Fondo verde del dropdown */
-    .custom-dropdown {
-        background-color: #36a838;
-        border: 1px solid black;
-        min-width: 180px;
-    }
+.custom-dropdown-item {
+    color: white;
+    border-bottom: 1px solid black;
+}
 
-    /* Estilo para cada item */
-    .custom-dropdown-item {
-        color: white;
-        border-bottom: 1px solid black;
-    }
+.custom-dropdown-item:last-child {
+    border-bottom: none;
+}
 
-    /* Evitar borde extra en el último item */
-    .custom-dropdown-item:last-child {
-        border-bottom: none;
-    }
+.custom-dropdown-item:hover {
+    background-color: #2e8d30;
+}
 
-    /* Hover claro para mejor visibilidad */
-    .custom-dropdown-item:hover {
-        background-color: #2e8d30;
-    }
+/* ============================================================
+   CARRUSEL
+============================================================ */
+.carousel-inner img {
+    height: 500px;
+    object-fit: cover;
+    border-radius: 8px;
+}
