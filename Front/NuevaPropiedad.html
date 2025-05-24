@@ -59,81 +59,209 @@
     <div class="row form-default" style="margin: 2rem;">
         <ul class="nav nav-tabs" id="propertyTabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="owner-tab" data-bs-toggle="tab" data-bs-target="#owner"
+                <button class="nav-link active" id="propietario-tab" data-bs-toggle="tab" data-bs-target="#propietario"
                     type="button" role="tab">Propietario</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="property-tab" data-bs-toggle="tab" data-bs-target="#property" type="button"
-                    role="tab">Propiedad</button>
+                <button class="nav-link" id="propiedad-tab" data-bs-toggle="tab" data-bs-target="#propiedad"
+                    type="button" role="tab">Propiedad</button>
             </li>
         </ul>
-        <form class="col-sm-12 border p-4 bg-white" >
+        <form class="col-sm-12 border p-4 bg-white">
             <div class="tab-content mt-3" id="propertyTabsContent">
                 <!-- TAB 1: Propietario -->
-                <div class="tab-pane fade show active" id="owner" role="tabpanel">
-                    <div class="col-md-12">
-                        <div class="col-md-3" style="display: flex; align-items: center;">
-                            <div class="col-md-2">
-                                <label for="">Apellido: </label>
+                <div class="tab-pane fade show active" id="propietario" role="tabpanel">
+                    <div class="container">
+                        <div class="row mb-3 justify-content-center">
+                            <div class="row mb-3 justify-content-center align-items-center">
+                                <!-- Apellido -->
+                                <label class="col-sm-1 col-form-label">Apellido:</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" placeholder="Apellido">
+                                </div>
+                                <!-- Nombre -->
+                                <label class="col-sm-1 col-form-label ">Nombre:</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" placeholder="Nombre">
+                                </div>
                             </div>
-                            <input class="form-control" placeholder="Apellido">
+                        </div>
+                        <div class="row mb-3 justify-content-center">
+                            <div class="row mb-3 justify-content-center align-items-center">
+                                <!-- DNI -->
+                                <label class="col-sm-1 col-form-label">DNI:</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" placeholder="DNI">
+                                </div>
+                                <!-- CUIL -->
+                                <label class="col-sm-1 col-form-label">CUIL:</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" placeholder="CUIL">
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="col-md-3"><input class="form-control" placeholder="Nombre"></div>
-                        <div class="col-md-3"><input class="form-control" placeholder="DNI"></div>
-                        <div class="col-md-3"><input class="form-control" placeholder="CUIL"></div>
-                        <div class="col-md-4"><input class="form-control" placeholder="Teléfono"></div>
-                        <div class="col-md-8"><input class="form-control" type="email" placeholder="Email"></div>
-                        <div class="col-md-5"><input class="form-control" placeholder="Calle"></div>
-                        <div class="col-md-2"><input class="form-control" placeholder="Número"></div>
-                        <div class="col-md-5"><input class="form-control" placeholder="Barrio"></div>
-                        <div class="col-md-3"><input class="form-control" placeholder="Código Postal"></div>
-                        <div class="col-md-5"><input class="form-control" placeholder="Localidad"></div>
-                        <div class="col-md-4"><input class="form-control" placeholder="Provincia"></div>
+                        <div class="row mb-3 justify-content-center">
+                            <div class="row mb-3 justify-content-center align-items-center">
+                                <!-- Teléfono -->
+                                <label class="col-sm-1 col-form-label">Teléfono:</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" placeholder="Teléfono">
+                                </div>
+                                <!-- Email -->
+                                <label class="col-sm-1 col-form-label">Email:</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" placeholder="Email">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3 justify-content-center">
+                            <div class="row mb-3 justify-content-center align-items-center">
+                                <!-- Provincia -->
+                                <label class="col-sm-1 col-form-label">Provincia:</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" placeholder="Teléfono">
+                                </div>
+                                <!-- Localidad -->
+                                <label class="col-sm-1 col-form-label">Localidad:</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" placeholder="Email">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3 justify-content-center">
+                            <div class="row mb-3 justify-content-center align-items-center">
+                                <!-- Código Postal -->
+                                <label class="col-sm-1 col-form-label">Código Postal:</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" placeholder="Teléfono">
+                                </div>
+                                <!-- Barrio -->
+                                <label class="col-sm-1 col-form-label">Barrio:</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" placeholder="Email">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3 justify-content-center">
+                            <div class="row mb-3 justify-content-center align-items-center">
+                                <!-- Calle -->
+                                <label class="col-sm-1 col-form-label">Calle:</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" placeholder="Teléfono">
+                                </div>
+                                <!-- Número -->
+                                <label class="col-sm-1 col-form-label">Número:</label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" placeholder="Email">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- TAB 2: Propiedad -->
-                <div class="tab-pane fade" id="property" role="tabpanel">
-                    <div class="row g-3">
-                        <div class="col-md-4"><input class="form-control" placeholder="Provincia"></div>
-                        <div class="col-md-4"><input class="form-control" placeholder="Localidad"></div>
-                        <div class="col-md-4"><input class="form-control" placeholder="Barrio"></div>
-                        <div class="col-md-4"><input class="form-control" placeholder="Manzana"></div>
-                        <div class="col-md-4"><input class="form-control" placeholder="Calle"></div>
-                        <div class="col-md-4"><input class="form-control" placeholder="Altura"></div>
-                        <div class="col-md-6"><input class="form-control" placeholder="Descripción corta"></div>
-                        <div class="col-md-6"><textarea class="form-control" placeholder="Descripción larga"></textarea>
+                <div class="tab-pane fade" id="propiedad" role="tabpanel">
+                    <div class="container">
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Provincia</label>
+                                <input class="form-control" placeholder="Provincia">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Localidad</label>
+                                <input class="form-control" placeholder="Localidad">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Barrio</label>
+                                <input class="form-control" placeholder="Barrio">
+                            </div>
                         </div>
-                        <div class="col-md-4"><input class="form-control" placeholder="Precio" type="number" min="0">
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Manzana</label>
+                                <input class="form-control" placeholder="Manzana">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Calle</label>
+                                <input class="form-control" placeholder="Calle">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Altura</label>
+                                <input class="form-control" placeholder="Altura">
+                            </div>
                         </div>
-                        <div class="col-md-4"><input class="form-control" placeholder="Cantidad de ambientes"
-                                type="number" min="1"></div>
-                        <div class="col-md-4">
-                            <select class="form-select">
-                                <option selected>Estado</option>
-                                <option>Disponible</option>
-                                <option>Reservado</option>
-                                <option>Vendido</option>
-                            </select>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Precio</label>
+                                <input class="form-control" placeholder="Precio">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Cantidad de ambientes</label>
+                                <input type="number" min="1" class="form-control" placeholder="Cantidad de ambientes">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Estado</label>
+                                <select class="form-select">
+                                    <option selected>Estado</option>
+                                    <option>Disponible</option>
+                                    <option>Reservado</option>
+                                    <option>Vendido</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="col-md-5">
-                            <label class="form-label">Imágenes (puedes subir varias):</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Archivo" maxlength="100"
-                                    id="file-path" disabled>
-                                <button type="button" class="btn btn-outline-secondary" id="file-browser">
-                                    <i class="bi bi-paperclip">Seleccionar</i>
-                                </button>
-                                <input type="file" id="real-file" style="display: none;" multiple>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Descripción corta</label>
+                                <textarea class="form-control" placeholder="Descripción corta" rows="3"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Descripción larga</label>
+                                <textarea class="form-control" placeholder="Descripción larga" rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Imágenes:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Archivo" maxlength="100"
+                                        id="file-path" disabled>
+                                    <button type="button" class="btn btn-outline-secondary" id="file-browser">
+                                        <i class="bi bi-paperclip">Seleccionar</i>
+                                    </button>
+                                    <input type="file" id="real-file" style="display: none;" multiple>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Imagen -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">URL de Imagen</label>
+                                <input type="url" class="form-control" id="imageUrlInput" placeholder="https://...">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label d-block">Vista previa</label>
+                                <img id="imagePreview"
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTKyJtLdqtTo_myIf9WB8ea29GhSFugzptRA&s"
+                                    alt="Vista previa" class="img-fluid border" style="max-height: 200px;">
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="text-end mt-4">
-                    <button type="submit" class="btn btn-success">Guardar propiedad</button>
-                </div>
+            </div>
+
+            <div class="text-end mt-4">
+                <button type="submit" class="btn" id="btnNuevaPropiedad">Guardar propiedad</button>
+            </div>
         </form>
     </div>
 
@@ -148,6 +276,25 @@
             const input = document.getElementById('file-path');
             const files = Array.from(this.files).map(f => f.name).join(', ');
             input.value = files || "Sin archivos seleccionados";
+        });
+
+        const defaultImg = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTKyJtLdqtTo_myIf9WB8ea29GhSFugzptRA&s";
+
+        document.getElementById("imageUrlInput").addEventListener("input", function () {
+            const url = this.value.trim();
+            const preview = document.getElementById("imagePreview");
+
+            if (!url) {
+                preview.src = defaultImg;
+                return;
+            }
+
+            try {
+                new URL(url); // Verifica si la URL es válida
+                preview.src = url;
+            } catch (e) {
+                preview.src = defaultImg;
+            }
         });
     </script>
 
