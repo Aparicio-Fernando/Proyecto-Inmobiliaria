@@ -21,7 +21,7 @@ main {
    TARJETAS DE PROPIEDADES
 ============================================================ */
 .property-card {
-    display: flex;
+    display: block;
     align-items: center;
     padding: 1rem;
     margin-bottom: 1rem;
