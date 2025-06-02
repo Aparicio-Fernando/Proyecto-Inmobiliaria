@@ -1,111 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Listado de Propiedades</title>
+
+    <script type="text/javascript" src="/Front/js.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/Front/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 
-<body>
+<body style="background-color: #e8f5e9;">
+    <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg" style="background-color: #36a838;">
         <div class="container py-3">
-            <!-- Logo o nombre del sitio -->
             <a class="navbar-brand text-white fw-bold" href="/Front/Index.html">
                 <img src="/Front/Imagenes/logo2.png" alt="Logo" style="height: 60px; width: auto;">
             </a>
-
-            <!-- Botón responsive -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <!-- Menú -->
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav ms-auto">
-                    <!-- Dropdown Ventas -->
                     <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-white fw-semibold" href="#" id="ventasDropdown"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle text-white fw-semibold" href="#" role="button"
+                            data-bs-toggle="dropdown">
                             Propiedades
                         </a>
-                        <ul class="dropdown-menu custom-dropdown" aria-labelledby="ventasDropdown">
+                        <ul class="dropdown-menu custom-dropdown">
                             <li><a class="dropdown-item custom-dropdown-item" href="/Front/_ListaPropiedades.html">Ver
                                     propiedades</a></li>
                             <li><a class="dropdown-item custom-dropdown-item" href="/Front/NuevaPropiedad.html">Cargar
                                     propiedades</a></li>
                         </ul>
                     </div>
-
-                    <!-- Otros enlaces -->
                     <a class="nav-link text-white fw-semibold ms-3" href="#">Alquileres</a>
                     <a class="nav-link text-white fw-semibold ms-3" href="#">Contacto</a>
                     <a class="nav-link text-white fw-semibold ms-3" href="#">Sobre nosotros</a>
+                    <a class="nav-link text-white fw-semibold ms-3" href="/Front/login.html">Iniciar sesión</a>
                 </div>
             </div>
         </div>
     </nav>
 
+    <!-- CONTENIDO PRINCIPAL -->
     <div class="container my-5">
-        <div id="contenedor-cards" class="row row-cols-1 row-cols-md-3 g-4"></div>
+        <div id="contenedor-cards" class="w-100"></div>
     </div>
 
-    <!-- Paginación -->
+    <!-- PAGINACIÓN -->
     <nav aria-label="Paginación de propiedades">
         <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link">Anterior</a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">Siguiente</a>
-            </li>
+            <li class="page-item disabled"><a class="page-link">Anterior</a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
         </ul>
     </nav>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function dibujarPropiedades() {
-            const contenedor = document.getElementById('contenedor-cards');
-            contenedor.innerHTML = ''; // Limpiar
-
-            const propiedades = JSON.parse(localStorage.getItem('propiedadData')) || [];
-
-            propiedades.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'col';
-
-                card.innerHTML = `
-                <div class="card h-100 shadow-sm">
-                    <img src="${p.imagenUrl}" class="card-img-top" alt="Imagen de propiedad" onerror="this.src='https://via.placeholder.com/400x250?text=Sin+imagen'">
-                    <div class="card-body">
-                        <h5 class="card-title">${p.titulo}</h5>
-                        <p class="card-text">
-                            <strong>Habitaciones:</strong> ${p.habitaciones}<br>
-                            <strong>Baños:</strong> ${p.banios}<br>
-                            <strong>Metros²:</strong> ${p.metros}<br>
-                            <strong>Precio:</strong> $${Number(p.precio).toLocaleString()}
-                        </p>
+    <main>
+        <div class="modal fade" id="modalPropietario" tabindex="-1" aria-labelledby="modalPropietarioLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title" id="modalPropietarioLabel">Datos del Propietario</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Cerrar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="contenidoPropietario">
+                            <!-- contenido dinámico -->
+                        </div>
                     </div>
                 </div>
-            `;
-                contenedor.appendChild(card);
-            });
-        }
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Oficina</h5>
+                    <p class="mb-1">Av. San Martín Nº 4301</p>
+                    <p class="mb-1">Bº Centro, Río Ceballos, Córdoba</p>
+                    <p class="mb-1">Tel: 03543-450490 / 3543-533726</p>
+                    <p class="mb-0">Email: <a href="mailto:sucursal1@pehueninmobiliaria.com.ar"
+                            class="text-light">sucursal1@pehueninmobiliaria.com.ar</a></p>
+                </div>
+                <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                    <p class="mb-0">&copy; 2025 Pehuén Inmobiliaria. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-        // Llamamos la función automáticamente cuando se carga la página
-        document.addEventListener('DOMContentLoaded', dibujarPropiedades);
+
+    <!-- SCRIPTS -->
+    <script>
+        $(document).ready(function () {
+            dibujarPropiedades();
+        });
     </script>
+
+    <!-- BOOTSTRAP JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

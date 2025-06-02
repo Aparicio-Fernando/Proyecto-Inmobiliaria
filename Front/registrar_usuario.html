@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inmobiliaria - Propiedades en Venta</title>
+    <title>Registro usuario</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/Front/styles.css" rel="stylesheet">
@@ -51,47 +51,46 @@
         </div>
     </nav>
     <main>
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
-                    aria-label="Slide 4"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
-                    aria-label="Slide 5"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="/Front/Imagenes/1.jpg" class="d-block w-100" alt="Casa 1">
+        <div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+            <form class="formulario-pequeno border p-4 bg-light shadow rounded" style="width: 100%; max-width: 400px;">
+                <h4 class="text-center text-dark"><b>Registra tu Cuenta</b></h4><br />
+                <div class="mb-3">
+                    <label for="nuevoUsuario" class="form-label"><b>Nombre de Usuario</b></label>
+                    <input type="text" placeholder="Ingrese su Nombre" class="form-control" id="nuevoUsuario"
+                        required />
                 </div>
-                <div class="carousel-item">
-                    <img src="/Front/Imagenes/2.jpg" class="d-block w-100" alt="Casa 2">
+                <div class="mb-3">
+                    <label for="NuevoApellido" class="form-label"><b>Apellido de Usuario</b></label>
+                    <input type="text" placeholder="Ingrese su Apellido" class="form-control" id="NuevoApellido"
+                        required />
                 </div>
-                <div class="carousel-item">
-                    <img src="/Front/Imagenes/3.jpg" class="d-block w-100" alt="Casa 3">
+                <div class="mb-3">
+                    <label for="email" class="form-label"><b>Email</b></label>
+                    <input type="email" placeholder="Ingrese su Gmail" class="form-control" id="email" required />
                 </div>
-                <div class="carousel-item">
-                    <img src="/Front/Imagenes/4.jpg" class="d-block w-100" alt="Casa 4">
+                <div class="mb-3">
+                    <label for="nuevoPassword" class="form-label"><b>Contraseña</b></label>
+                    <input type="password" placeholder="Ingrese su Contraseña" class="form-control" id="nuevoPassword"
+                        required />
                 </div>
-                <div class="carousel-item">
-                    <img src="/Front/Imagenes/5.jpg" class="d-block w-100" alt="Casa 5">
+                <div class="mb-3">
+                    <label for="NuevoContacto" class="form-label"><b>Nro de Contacto</b></label>
+                    <input type="text" placeholder="Ingrese su Telefono" class="form-control" id="NuevoContacto"
+                        required />
                 </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </button>
+                <div class="mb-3">
+                    <label for="NuevoFecha_Nacimiento" class="form-label"><b>Fecha de Nacimiento</b></label>
+                    <input type="text" placeholder="Ingrese su Nacimiento" class="form-control"
+                        id="NuevoFecha_Nacimiento" required />
+                </div>
+
+                <div class="text-center d-flex justify-content-center gap-2 mt-4">
+                    <a href="/Front/login.html" class="btn btn-outline-secondary">Volver</a>
+                    <button type="submit" class="btn btn-success px-4">Registrarse</button>
+                </div>
+            </form>
         </div>
     </main>
-
     <!-- Footer -->
     <footer class="bg-dark text-light py-4 mt-5">
         <div class="container">
@@ -112,7 +111,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 
 </html>
