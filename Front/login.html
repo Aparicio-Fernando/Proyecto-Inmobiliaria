@@ -39,29 +39,25 @@
 
     <!-- CONTENIDO -->
     <main>
-        <div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
-            <form class="formulario-pequeno tab-content border border-top-0 p-4 bg-light shadow rounded" method="post">
-                <h4 class="text-center text-dark"><b>Bienvenido</b></h4><br />
-                <div class="tab-pane fade show active" id="login" role="tabpanel">
-                    <div class="mb-3">
-                        <label for="Usuario" class="form-label"><b>Usuario</b></label>
-                        <input type="text" placeholder="Usuario" class="form-control" id="Usuario" required />
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label"><b>Password</b></label>
-                        <input type="password" placeholder="Password" class="form-control" id="password" required />
-                    </div>
-                    <div class="text-center d-flex justify-content-center gap-2 mt-4">
-                        <button type="button" class="btn btn-outline-success px-4">Login</button>
-                    </div>
-                    <div class="text-center login-footer mt-4">
-                        <p>¿Perdiste tu contraseña?</p>
-                        <p>¿No tienes cuenta?</p>
-                        <a class="btn btn-success px-4" href="/Front/registrar_usuario.html">Registrarse</a>
-                    </div>
-                </div>
-            </form>
-        </div>
+        <form class="formulario-pequeno border p-4 bg-light shadow rounded" method="post">
+            <h4 class="text-center text-dark"><b>Bienvenido</b></h4><br />
+            <div class="mb-3">
+                <label for="Usuario" class="form-label"><b>Usuario</b></label>
+                <input type="text" class="form-control" id="Usuario" name="Usuario" required />
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label"><b>Password</b></label>
+                <input type="password" class="form-control" id="password" name="password" required />
+            </div>
+            <div class="mt-4 text-center d-flex justify-content-center gap-2">
+                <button type="submit" class="btn btn-outline-success px-4">Login</button>
+            </div>
+            <div class="text-center login-footer mt-4">
+                <p>¿Perdiste tu contraseña?</p>
+                <p>¿No tienes cuenta?</p>
+                <a class="btn btn-success px-4" href="/Front/registrar_usuario.html">Registrarse</a>
+            </div>
+        </form>
     </main>
 
     <!-- FOOTER -->

@@ -2,7 +2,7 @@ const propietarioData = [];
 const domiciliosPropietario = [];
 const propiedadData = [];
 const domicilioPropiedad = [];
-const ventas =[];
+const ventas = [];
 
 function mostrarVistaPrevia() {
     const url = $('#urlImagen').val().trim();
@@ -114,6 +114,7 @@ function Guardar(e) {
 
     $('#formulario')[0].reset();
     $('#vistaPrevia').attr('src', 'https://img.freepik.com/vector-premium/banner-inmobiliario-icono-casa-estilo-plano-ilustracion-vectorial-etiqueta-venta-fondo-aislado-concepto-negocio-cartel-vendido_157943-44131.jpg?semt=ais_items_boosted&w=740');
+
 }
 
 function irAlTab(tabId) {
@@ -344,9 +345,10 @@ function confirmarVenta() {
     };
 
     // Guardar venta
-    const ventas = JSON.parse(localStorage.getItem("ventasRealizadas")) || [];
+    let ventas = JSON.parse(localStorage.getItem("ventas")) || [];
     ventas.push(venta);
-    localStorage.setItem("ventasRealizadas", JSON.stringify(ventas));
+    localStorage.setItem("ventas", JSON.stringify(ventas));
+    ventas.push(venta);
 
     // Actualizar propiedad a "vendida"
     const idx = propiedades.findIndex(p => p.IdPropiedad === idProp);
@@ -360,7 +362,13 @@ function confirmarVenta() {
 }
 
 function redirigirListado() {
-  const modal = bootstrap.Modal.getInstance(document.getElementById('modalVentaConfirmada'));
-  modal.hide();
-  window.location.href = "/Front/_ListaPropiedades.html";
+    const modal = bootstrap.Modal.getInstance(document.getElementById('modalVentaConfirmada'));
+    modal.hide();
+    window.location.href = "/Front/_ListaPropiedades.html";
+}
+
+function cerrarModalYVolverAlInicio() {
+    const modal = bootstrap.Modal.getInstance(document.getElementById('modalCargado'));
+    modal.hide();
+    irAlTab('propietario');
 }

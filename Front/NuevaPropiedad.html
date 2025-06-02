@@ -57,19 +57,19 @@
         <div class="container my-5">
             <ul class="nav nav-tabs" id="formTabs" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="propietario-tab" data-bs-toggle="tab" data-bs-target="#propietario"
-                        type="button" role="tab">Propietario</button>
+                    <button class="nav-link active" id="propietario-tab" data-bs-toggle="tab"
+                        data-bs-target="#propietario" type="button" role="tab">Propietario</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="propiedad-tab" data-bs-toggle="tab" data-bs-target="#propiedad"
                         type="button" role="tab">Propiedad</button>
                 </li>
             </ul>
-    
+
             <form class="tab-content border border-top-0 p-4 bg-light" id="formulario" onsubmit="Guardar(event)">
                 <!-- Tab Propietario -->
                 <div class="tab-pane fade show active" id="propietario" role="tabpanel">
-    
+
                     <h5 class="mb-3 border-bottom pb-2">🧍 Datos personales</h5>
                     <div class="row">
                         <div class="col-md-4 mb-3">
@@ -97,7 +97,7 @@
                             <input type="email" class="form-control" id="email_Propietario" required>
                         </div>
                     </div>
-    
+
                     <h5 class="mt-4 mb-3 border-bottom pb-2">🏠 Domicilio</h5>
                     <div class="row">
                         <div class="col-md-4 mb-3">
@@ -133,10 +133,10 @@
                         <button type="button" class="btn btn-primary" onclick="irAlTab('propiedad')">Siguiente</button>
                     </div>
                 </div>
-    
+
                 <!-- Tab Propiedad -->
                 <div class="tab-pane fade" id="propiedad" role="tabpanel">
-    
+
                     <h5 class="mb-3 border-bottom pb-2">📄 Datos del Inmueble</h5>
                     <div class="row">
                         <div class="col-md-4 mb-3">
@@ -182,7 +182,7 @@
                             <input type="number" class="form-control" id="banios" required>
                         </div>
                     </div>
-    
+
                     <h5 class="mt-4 mb-3 border-bottom pb-2">📍 Ubicación</h5>
                     <div class="row">
                         <div class="col-md-4 mb-3">
@@ -214,7 +214,7 @@
                             <input type="text" class="form-control" id="dpto">
                         </div>
                     </div>
-    
+
                     <h5 class="mt-4 mb-3 border-bottom pb-2">🖼 Imagen</h5>
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -228,16 +228,16 @@
                                 alt="Vista previa de la imagen" class="img-thumbnail" style="max-width: 300px;">
                         </div>
                     </div>
-    
+
                     <div class="mt-4 d-flex justify-content-end gap-2">
                         <button type="button" class="btn btn-primary" onclick="irAlTab('propietario')">Anterior</button>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
                 </div>
-    
+
             </form>
         </div>
-    
+
         <!-- Modal: Propiedad cargada -->
         <div class="modal fade" id="modalCargado" tabindex="-1" aria-labelledby="modalCargadoLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm modal-dialog-centered">
@@ -256,7 +256,7 @@
                 </div>
             </div>
         </div>
-    
+
         <!-- Modal: Propiedad modificada -->
         <div class="modal fade" id="modalModificado" tabindex="-1" aria-labelledby="modalModificadoLabel"
             aria-hidden="true">
@@ -271,14 +271,14 @@
                         Datos actualizados.
                     </div>
                     <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-success" onclick="cerrarYRedirigir()">Aceptar</button>
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Aceptar</button>
                     </div>
                 </div>
             </div>
         </div>
     </main>
     <!-- Footer -->
-    <!-- <footer class="bg-dark text-light py-4 mt-5">
+   <footer class="bg-dark text-light py-4 mt-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -294,7 +294,7 @@
                 </div>
             </div>
         </div>
-    </footer> -->
+    </footer>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -302,6 +302,13 @@
     <script>
         $(document).ready(function () {
             cargarFormularioEdicion();
+        });
+
+        // Cuando se oculta el modal de carga, volver al tab de propietario
+        document.getElementById('modalCargado').addEventListener('hidden.bs.modal', function () {
+            setTimeout(() => {
+                irAlTab('propietario');
+            }, 100); // pequeño delay para asegurar que se redibuje correctamente
         });
     </script>
 </body>

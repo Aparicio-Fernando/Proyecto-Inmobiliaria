@@ -51,46 +51,51 @@
         </div>
     </nav>
     <main>
-        <div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
-            <form class="formulario-pequeno border p-4 bg-light shadow rounded" style="width: 100%; max-width: 400px;">
-                <h4 class="text-center text-dark"><b>Registra tu Cuenta</b></h4><br />
-                <div class="mb-3">
-                    <label for="nuevoUsuario" class="form-label"><b>Nombre de Usuario</b></label>
-                    <input type="text" placeholder="Ingrese su Nombre" class="form-control" id="nuevoUsuario"
-                        required />
-                </div>
-                <div class="mb-3">
-                    <label for="NuevoApellido" class="form-label"><b>Apellido de Usuario</b></label>
-                    <input type="text" placeholder="Ingrese su Apellido" class="form-control" id="NuevoApellido"
-                        required />
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label"><b>Email</b></label>
-                    <input type="email" placeholder="Ingrese su Gmail" class="form-control" id="email" required />
-                </div>
-                <div class="mb-3">
-                    <label for="nuevoPassword" class="form-label"><b>Contraseña</b></label>
-                    <input type="password" placeholder="Ingrese su Contraseña" class="form-control" id="nuevoPassword"
-                        required />
-                </div>
-                <div class="mb-3">
-                    <label for="NuevoContacto" class="form-label"><b>Nro de Contacto</b></label>
-                    <input type="text" placeholder="Ingrese su Telefono" class="form-control" id="NuevoContacto"
-                        required />
-                </div>
-                <div class="mb-3">
-                    <label for="NuevoFecha_Nacimiento" class="form-label"><b>Fecha de Nacimiento</b></label>
-                    <input type="text" placeholder="Ingrese su Nacimiento" class="form-control"
-                        id="NuevoFecha_Nacimiento" required />
-                </div>
+    <form class="formulario-pequeno border p-4 bg-light shadow rounded w-100" style="max-width: 700px;" method="post">
+        <h4 class="text-center text-dark mb-4"><b>Registrá tu cuenta</b></h4>
 
-                <div class="text-center d-flex justify-content-center gap-2 mt-4">
-                    <a href="/Front/login.html" class="btn btn-outline-secondary">Volver</a>
-                    <button type="submit" class="btn btn-success px-4">Registrarse</button>
-                </div>
-            </form>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="nombreCuenta" class="form-label"><b>Nombre de cuenta</b></label>
+                <input type="text" class="form-control" id="nuevoUsuario" required />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="Apellido" class="form-label"><b>Apellido</b></label>
+                <input type="text" class="form-control" id="NuevoApellido" required />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="Nombre" class="form-label"><b>Nombre</b></label>
+                <input type="text" class="form-control" id="NuevoNombre" required />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="Password" class="form-label"><b>Contraseña</b></label>
+                <input type="password" class="form-control" id="NuevoPassword" required />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="confirmarPassword" class="form-label"><b>Confirmar contraseña</b></label>
+                <input type="password" class="form-control" id="ConfirmarPassword" required />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="email" class="form-label"><b>Email</b></label>
+                <input type="email" class="form-control" id="email" required />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="telefono" class="form-label"><b>Teléfono</b></label>
+                <input type="text" class="form-control" id="telefono" required />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="NuevoFecha_Nacimiento" class="form-label"><b>Fecha de Nacimiento</b></label>
+                <input type="date" class="form-control" id="NuevoFecha_Nacimiento" required />
+            </div>
         </div>
-    </main>
+
+        <div class="text-center d-flex justify-content-center gap-2 mt-4">
+            <a href="/Front/login.html" class="btn btn-outline-secondary">Volver</a>
+            <button type="submit" class="btn btn-success px-4">Registrarse</button>
+        </div>
+    </form>
+</main>
+
     <!-- Footer -->
     <footer class="bg-dark text-light py-4 mt-5">
         <div class="container">

@@ -1,11 +1,9 @@
 /* ============================================================
    ESTILOS GENERALES
 ============================================================ */
-html,
-body {
+html, body {
     height: 100%;
     margin: 0;
-    padding: 0;
 }
 
 body {
@@ -14,11 +12,59 @@ body {
     flex-direction: column;
 }
 
-/* El main se expande para mantener el footer abajo */
 main {
     flex: 1;
-    min-height: 35rem;
-    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+/* ============================================================
+   NAVBAR - DROPDOWN PERSONALIZADO
+============================================================ */
+.custom-dropdown {
+    background-color: #43a047;
+    border: 1px solid black;
+    min-width: 180px;
+}
+
+.custom-dropdown-item {
+    color: white;
+    border-bottom: 1px solid black;
+}
+
+.custom-dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.custom-dropdown-item:hover {
+    background-color: #2e8d30;
+}
+
+/* ============================================================
+   CARRUSEL (INDEX)
+============================================================ */
+#carouselExampleIndicators {
+    height: 100% !important;
+    width: 100%;
+}
+
+.carousel-inner,
+.carousel-item,
+.carousel-item img {
+    height: 40rem !important;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* ============================================================
+   VISTA LOGIN Y REGISTRO
+============================================================ */
+.formulario-pequeno {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 /* ============================================================
@@ -53,57 +99,17 @@ main {
 }
 
 /* ============================================================
-   DROPDOWN PERSONALIZADO (NAVBAR)
+   VISTA NUEVA PROPIEDAD / NUEVA VENTA
 ============================================================ */
-.custom-dropdown {
-    background-color: #43a047;
-    border: 1px solid black;
-    min-width: 180px;
-}
-
-.custom-dropdown-item {
-    color: white;
-    border-bottom: 1px solid black;
-}
-
-.custom-dropdown-item:last-child {
-    border-bottom: none;
-}
-
-.custom-dropdown-item:hover {
-    background-color: #2e8d30;
-}
-
-/* ============================================================
-   CARRUSEL
-============================================================ */
- #carouselExampleIndicators {
-    height: 100%!important;
-    width: 100%;
-}
-
-.carousel-inner,
-.carousel-item,
-.carousel-item img {
-    height: 100%!important;
-    width: 100%;
-    object-fit: cover;
-}
-/* ============================================================
-   VISTA CARGA
-============================================================ */
-#btnNuevaPropiedad{
+#btnNuevaPropiedad {
     background-color: #43a047;
     color: #fff;
     font-weight: bold;
 }
 
-.row label{
+.row label {
     margin-left: 2rem;
-   
 }
-
-
 
 .card-propiedad {
     display: flex;
@@ -113,7 +119,7 @@ main {
     height: 150px;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 1rem;
 }
 
