@@ -135,7 +135,7 @@
             <div class="tab-pane fade" id="cobro" role="tabpanel">
                 <div class="row">
                     <div class="col-md-4 mb-3">
-                        <label class="form-label">Medio de pago</label>
+                        <label class="form-label">Medio de cobro</label>
                         <select class="form-select" id="cobro_medio" required>
                             <option value="">Seleccionar</option>
                             <option value="efectivo">Efectivo</option>
@@ -226,20 +226,34 @@
                 const direccion = `${dom.Calle} ${dom.Altura || ''}, ${dom.Barrio || ''}, ${dom.Localidad}, ${dom.Provincia}`;
                 $('#venta_direccion').val(direccion);
             }
+
+            $('#formVenta').on('input change', 'input, select', function () {
+                if ($(this).val().trim() !== "") {
+                    $(this).removeClass('error');
+                    $(this).siblings('.invalid-feedback').remove();
+                }
+            });
         });
 
         function validarVenta() {
-            const vacios = $('#cliente_apellido, #cliente_nombre, #cliente_dni, #cliente_cuil, #cliente_telefono, #cliente_email')
-                .filter(function () {
-                    return $(this).val().trim() === "";
-                });
+            // Limpiar errores anteriores
+            $('#venta input').removeClass('error');
+            $('#venta .invalid-feedback').remove();
 
-            if (vacios.length > 0) {
-                alert("Debe completar todos los campos del cliente.");
-                return;
-            }
+            let valido = true;
 
-            // Habilitar tab Cobro
+            // Validar campos requeridos
+            $('#cliente_apellido, #cliente_nombre, #cliente_dni, #cliente_cuil, #cliente_telefono, #cliente_email').each(function () {
+                if ($(this).val().trim() === "") {
+                    $(this).addClass('error');
+                    $(this).after('<div class="invalid-feedback">Campo obligatorio</div>');
+                    valido = false;
+                }
+            });
+
+            if (!valido) return;
+
+            // Habilitar tab Cobro y avanzar
             $('#cobro-tab').removeAttr('disabled');
             const tab = new bootstrap.Tab(document.getElementById('cobro-tab'));
             tab.show();

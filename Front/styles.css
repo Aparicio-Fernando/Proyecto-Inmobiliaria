@@ -20,6 +20,21 @@ main {
     padding: 2rem;
 }
 
+#propietario h5{
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+#propiedad h5{
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+.form-label{
+    font-weight: bolder;
+    font-size: 16px;
+}
+
 /* ============================================================
    NAVBAR - DROPDOWN PERSONALIZADO
 ============================================================ */
@@ -148,4 +163,18 @@ main {
     align-items: flex-end;
     justify-content: space-between;
     height: 100%;
+}
+
+input.error, select.error {
+    border: 1px solid red;
+}
+
+.invalid-feedback {
+    display: none;
+    color: red;
+    font-size: 0.875rem;
+}
+input.error ~ .invalid-feedback,
+select.error ~ .invalid-feedback {
+    display: block;
 }

@@ -57,12 +57,12 @@
         <div class="container my-5">
             <ul class="nav nav-tabs" id="formTabs" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="propietario-tab" data-bs-toggle="tab"
+                    <button class="nav-link active fw-bold" id="propietario-tab" data-bs-toggle="tab"
                         data-bs-target="#propietario" type="button" role="tab">Propietario</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="propiedad-tab" data-bs-toggle="tab" data-bs-target="#propiedad"
-                        type="button" role="tab">Propiedad</button>
+                    <button class="nav-link fw-bold" id="propiedad-tab" data-bs-toggle="tab" data-bs-target="#propiedad"
+                        type="button" role="tab" disabled>Propiedad</button>
                 </li>
             </ul>
 
@@ -75,26 +75,32 @@
                         <div class="col-md-4 mb-3">
                             <label for="apellido_Propietario" class="form-label">Apellido</label>
                             <input type="text" class="form-control" id="apellido_Propietario" required>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="nombre_Propietario" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="nombre_Propietario" required>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="dni_propietario" class="form-label">DNI</label>
                             <input type="text" class="form-control" id="dni_propietario" required>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="cuil_propietario" class="form-label">CUIL</label>
                             <input type="text" class="form-control" id="cuil_propietario" required>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="telefono_Propietario" class="form-label">Teléfono</label>
                             <input type="tel" class="form-control" id="telefono_Propietario" required>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="email_Propietario" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email_Propietario" required>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                     </div>
 
@@ -103,22 +109,27 @@
                         <div class="col-md-4 mb-3">
                             <label for="provincia_propietario" class="form-label">Provincia</label>
                             <input type="text" class="form-control" id="provincia_propietario" required>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="localidad_propietario" class="form-label">Localidad</label>
                             <input type="text" class="form-control" id="localidad_propietario" required>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="barrio_propietario" class="form-label">Barrio</label>
-                            <input type="text" class="form-control" id="barrio_propietario">
+                            <input type="text" class="form-control" id="barrio_propietario" required>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="calle_propietario" class="form-label">Calle</label>
                             <input type="text" class="form-control" id="calle_propietario" required>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                         <div class="col-md-2 mb-3">
                             <label for="altura_propietario" class="form-label">Altura</label>
-                            <input type="text" class="form-control" id="altura_propietario">
+                            <input type="text" class="form-control" id="altura_propietario" required>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                         <div class="col-md-2 mb-3">
                             <label for="piso_propietario" class="form-label">Piso</label>
@@ -130,7 +141,7 @@
                         </div>
                     </div>
                     <div class="mt-4 text-end">
-                        <button type="button" class="btn btn-primary" onclick="irAlTab('propiedad')">Siguiente</button>
+                        <button type="button" class="btn btn-primary" onclick="validarYAvanzar()">Siguiente</button>
                     </div>
                 </div>
 
@@ -142,18 +153,22 @@
                         <div class="col-md-4 mb-3">
                             <label for="descripcion_corta" class="form-label">Descripción corta</label>
                             <textarea class="form-control" id="descripcion_corta" rows="3" required></textarea>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                         <div class="col-md-8 mb-3">
                             <label for="descripcion_larga" class="form-label">Descripción larga</label>
                             <textarea class="form-control" id="descripcion_larga" rows="3" required></textarea>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for="precio" class="form-label">Precio</label>
+                            <label for="precio" class="form-label">Precio (U$S)</label>
                             <input type="number" class="form-control" id="precio" required>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="tipo_propiedad" class="form-label">Tipo de propiedad</label>
                             <select class="form-select" id="tipo_propiedad" required>
+                                <div class="invalid-feedback">Este campo es obligatorio.</div>
                                 <option value="">Seleccionar</option>
                                 <option value="1">Casa</option>
                                 <option value="2">Departamento</option>
@@ -163,6 +178,7 @@
                         <div class="col-md-4 mb-3">
                             <label for="estado" class="form-label">Estado</label>
                             <select class="form-select" id="estado" required>
+                                <div class="invalid-feedback">Este campo es obligatorio.</div>
                                 <option value="">Seleccionar</option>
                                 <option value="1">Disponible</option>
                                 <option value="2">Reservada</option>
@@ -170,16 +186,19 @@
                             </select>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for="metros" class="form-label">Metros cuadrados</label>
+                            <label for="metros" class="form-label">Metros cuadrados (m&sup2;)</label>
                             <input type="number" class="form-control" id="metros" required>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="ambientes" class="form-label">Cantidad de ambientes</label>
                             <input type="number" class="form-control" id="ambientes" required>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="banios" class="form-label">Cantidad de baños</label>
                             <input type="number" class="form-control" id="banios" required>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                     </div>
 
@@ -188,22 +207,27 @@
                         <div class="col-md-4 mb-3">
                             <label for="provincia" class="form-label">Provincia</label>
                             <input type="text" class="form-control" id="provincia" required>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="localidad" class="form-label">Localidad</label>
                             <input type="text" class="form-control" id="localidad" required>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="barrio" class="form-label">Barrio</label>
                             <input type="text" class="form-control" id="barrio">
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="calle" class="form-label">Calle</label>
                             <input type="text" class="form-control" id="calle" required>
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                         <div class="col-md-2 mb-3">
                             <label for="altura" class="form-label">Altura</label>
                             <input type="text" class="form-control" id="altura">
+                            <div class="invalid-feedback">Este campo es obligatorio.</div>
                         </div>
                         <div class="col-md-2 mb-3">
                             <label for="piso" class="form-label">Piso</label>
@@ -221,13 +245,16 @@
                             <label for="urlImagen" class="form-label">URL de imagen</label>
                             <input type="url" class="form-control" id="urlImagen" onchange="mostrarVistaPrevia()">
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Vista previa</label><br>
                             <img id="vistaPrevia"
                                 src="https://img.freepik.com/vector-premium/banner-inmobiliario-icono-casa-estilo-plano-ilustracion-vectorial-etiqueta-venta-fondo-aislado-concepto-negocio-cartel-vendido_157943-44131.jpg?semt=ais_items_boosted&w=740"
-                                alt="Vista previa de la imagen" class="img-thumbnail" style="max-width: 300px;">
+                                alt="Vista previa de la imagen" class="img-thumbnail" style="max-width: 400px;">
                         </div>
                     </div>
+
 
                     <div class="mt-4 d-flex justify-content-end gap-2">
                         <button type="button" class="btn btn-primary" onclick="irAlTab('propietario')">Anterior</button>
@@ -278,7 +305,7 @@
         </div>
     </main>
     <!-- Footer -->
-   <footer class="bg-dark text-light py-4 mt-5">
+    <footer class="bg-dark text-light py-4 mt-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -302,6 +329,13 @@
     <script>
         $(document).ready(function () {
             cargarFormularioEdicion();
+
+             $('#formulario').on('input change', 'input, select', function () {
+                if ($(this).val().trim() !== "") {
+                    $(this).removeClass('is-invalid');
+                    $(this).siblings('.invalid-feedback').remove();
+                }
+            });
         });
 
         // Cuando se oculta el modal de carga, volver al tab de propietario
