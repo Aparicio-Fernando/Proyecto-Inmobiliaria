@@ -140,24 +140,35 @@
                             <option value="">Seleccionar</option>
                             <option value="efectivo">Efectivo</option>
                             <option value="transferencia">Transferencia</option>
-                            <option value="tarjeta">Tarjeta</option>
                         </select>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label class="form-label">Fecha del cobro</label>
+                        <label class="form-label">Fecha de cobro</label>
                         <input type="date" class="form-control" id="cobro_fecha" required>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label">Monto</label>
-                        <input type="number" class="form-control" id="cobro_monto" required>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Subtotal ($)</label>
+                            <input type="number" class="form-control" id="cobro_subtotal" readonly>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Comisión (%)</label>
+                            <input type="number" class="form-control" id="cobro_comision" value="0">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Total a cobrar ($)</label>
+                            <input type="number" class="form-control" id="cobro_total" readonly>
+                        </div>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label">Banco</label>
-                        <input type="text" class="form-control" id="cobro_banco">
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label">Número de comprobante</label>
-                        <input type="text" class="form-control" id="cobro_comprobante">
+                    <div class="row" id="grupo_transferencia">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Banco</label>
+                            <input type="text" class="form-control" id="cobro_banco">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Número de comprobante</label>
+                            <input type="text" class="form-control" id="cobro_comprobante">
+                        </div>
                     </div>
                     <div class="col-md-12 mb-3">
                         <label class="form-label">Observaciones</label>
@@ -220,6 +231,9 @@
                 $('#venta_metros').val(prop.metros);
                 $('#venta_ambientes').val(prop.ambientes);
                 $('#venta_banios').val(prop.banios);
+                $('#venta_precio').val('$' + Number(prop.precio).toLocaleString());
+                $('#cobro_subtotal').val(Number(prop.precio));
+                actualizarTotal();
             }
 
             if (dom) {
@@ -233,6 +247,29 @@
                     $(this).siblings('.invalid-feedback').remove();
                 }
             });
+
+            // Ocultar al inicio
+            $('#grupo_transferencia').hide();
+
+            // Mostrar si se elige transferencia
+            $('#cobro_medio').on('change', function () {
+                const medio = $(this).val();
+                if (medio === 'transferencia') {
+                    $('#grupo_transferencia').show();
+                } else {
+                    $('#grupo_transferencia').hide();
+                    $('#cobro_banco, #cobro_comprobante').val('');
+                }
+            });
+            // Actualizar total automáticamente
+            function actualizarTotal() {
+                const subtotal = parseFloat($('#cobro_subtotal').val()) || 0;
+                const comision = parseFloat($('#cobro_comision').val()) || 0;
+                const total = subtotal + (subtotal * comision / 100);
+                $('#cobro_total').val(total.toFixed(2));
+            }
+
+            $('#cobro_comision').on('input', actualizarTotal);
         });
 
         function validarVenta() {
@@ -258,6 +295,7 @@
             const tab = new bootstrap.Tab(document.getElementById('cobro-tab'));
             tab.show();
         }
+        
     </script>
 </body>
 

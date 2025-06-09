@@ -41,48 +41,8 @@ function Guardar(e) {
         }
     });
 
-    // Validar datos de la propiedad
-    [
-        '#descripcion_corta', '#descripcion_larga', '#precio',
-        '#tipo_propiedad', '#estado', '#metros', '#ambientes', '#banios',
-        '#provincia', '#localidad', '#calle'
-    ].forEach(id => {
-        const $el = $(id);
-        const val = $el.val();
-        if (!$(id).val().trim()) {
-            const $el = $(id);
-            $el.addClass('is-invalid');
-
-            // Mostrar el mensaje de error incluso si no hay blur
-            const feedback = $el.closest('.mb-3').find('.invalid-feedback');
-            if (feedback.length) {
-                feedback.css('display', 'block');
-            }
-
-            camposInvalidos.push(id);
-        }
-    });
-
-    // Si hay campos vacíos, detener envío
-    if (camposInvalidos.length > 0) {
-        const primero = document.querySelector(camposInvalidos[0]);
-
-        // Mostrar el tab correspondiente
-        const idsPropiedad = [
-            '#descripcion_corta', '#descripcion_larga', '#precio',
-            '#tipo_propiedad', '#estado', '#metros', '#ambientes', '#banios',
-            '#provincia', '#localidad', '#calle'
-        ];
-        const errorEnPropiedad = idsPropiedad.includes(camposInvalidos[0]);
-
-        if (errorEnPropiedad) {
-            irAlTab('propiedad-tab');
-        } else {
-            irAlTab('propietario-tab');
-        }
-
-        if (primero) primero.focus();
-        return;
+    if (!validarPropiedad()) {
+        return
     }
 
     // Armado de objetos
@@ -251,23 +211,23 @@ function dibujarPropiedades() {
                     <!-- CENTRO: Estado + Datos -->
                     <div class="col-md-6 d-flex flex-column justify-content-between">
                         <!-- Estado -->
-                        <div class="text-center fw-bold text-uppercase border p-2 mb-2">
+                        <div class="text-center fw-bold text-uppercase border p-2 mb-2 estado-card">
                             ${estadoTexto}
                         </div>
                         <!-- Datos -->
                         <div>
-                            <p class="mb-1"><strong>Superficie construida:</strong> ${prop.metros} m&sup2;</p>
-                            <p class="mb-1"><strong>Ambientes:</strong> ${prop.ambientes}</p>
-                            <p class="mb-1"><strong>Baños:</strong> ${prop.banios}</p>
-                            <p class="mb-1 fw-bold">${prop.descripcionCorta}</p>
-                            <p class="text-muted small">${direccion}</p>
+                            <p class="mb-1" style="font-size:20px;"><strong>Superficie construida:</strong> ${prop.metros} m&sup2;</p>
+                            <p class="mb-1" style="font-size:20px;"><strong>Ambientes:</strong> ${prop.ambientes}</p>
+                            <p class="mb-1" style="font-size:20px;"><strong>Baños:</strong> ${prop.banios}</p>
+                            <p class="mb-1 fw-bold" style="font-size:20px;">${prop.descripcionCorta}</p>
+                            <p class="text-muted small" style="font-size:20px;">${direccion}</p>
                         </div>
                     </div>
 
                     <!-- DERECHA: Precio centrado verticalmente + botones al fondo -->
                     <div class="col-md-3 d-flex flex-column justify-content-between align-items-end">
                         <div class="flex-grow-1 w-100 d-flex align-items-center justify-content-center">
-                            <h2 class="text-success fw-bold mb-0">U$S${Number(prop.precio).toLocaleString()}</h2>
+                            <h2 class="text-success fw-bold mb-0 precio-lista">U$S${Number(prop.precio).toLocaleString()}</h2>
                         </div>
                         <div class="text-end mt-2">
                             <button class="btn btn-outline-success btn-sm me-2" onclick="iniciarVenta('${prop.IdPropiedad}')">
@@ -398,6 +358,7 @@ function confirmarVenta() {
     const idProp = localStorage.getItem("propiedadParaVenta");
     const propiedades = JSON.parse(localStorage.getItem("propiedadData")) || [];
     const domicilios = JSON.parse(localStorage.getItem("domiciliosPropiedad")) || [];
+    let ventas = JSON.parse(localStorage.getItem("ventas")) || [];
 
     const prop = propiedades.find(p => p.IdPropiedad === idProp);
     const dom = domicilios.find(d => d.IdPropiedad === idProp);
@@ -420,7 +381,7 @@ function confirmarVenta() {
     });
 
     // Validar campos requeridos de cobro
-    $('#cobro_medio, #cobro_fecha, #cobro_monto').each(function () {
+    $('#cobro_medio, #cobro_fecha').each(function () {
         if ($(this).val().trim() === "") {
             $(this).addClass('error');
             $(this).after('<div class="invalid-feedback">Campo obligatorio</div>');
@@ -428,14 +389,32 @@ function confirmarVenta() {
         }
     });
 
+    // Validar transferencia: banco y comprobante obligatorios
+    if ($('#cobro_medio').val() === 'transferencia') {
+        $('#cobro_banco, #cobro_comprobante').each(function () {
+            if ($(this).val().trim() === "") {
+                $(this).addClass('error');
+                $(this).after('<div class="invalid-feedback">Campo obligatorio</div>');
+                valido = false;
+            }
+        });
+    }
+
     if (!valido) return;
 
-    // Validar monto
-    const monto = parseFloat($('#cobro_monto').val());
-    const precio = parseFloat(prop.precio);
-    if (monto !== precio) {
-        $('#cobro_monto').addClass('error');
-        $('#cobro_monto').after('<div class="invalid-feedback">El monto debe coincidir con el precio de la propiedad</div>');
+    // Validar monto total >= subtotal
+    const subtotal = parseFloat($('#cobro_subtotal').val());
+    const total = parseFloat($('#cobro_total').val());
+
+    if (isNaN(total) || isNaN(subtotal)) {
+        $('#cobro_comision').addClass('error');
+        $('#cobro_comision').after('<div class="invalid-feedback">Total inválido</div>');
+        return;
+    }
+
+    if (total < subtotal) {
+        $('#cobro_total').addClass('error');
+        $('#cobro_total').after('<div class="invalid-feedback">El total no puede ser menor al subtotal</div>');
         return;
     }
 
@@ -454,18 +433,21 @@ function confirmarVenta() {
         cobro: {
             Medio: $('#cobro_medio').val(),
             Fecha: $('#cobro_fecha').val(),
-            Monto: monto,
+            Subtotal: subtotal,
+            Comision: parseFloat($('#cobro_comision').val()),
+            Monto: total,
             Banco: $('#cobro_banco').val(),
             Comprobante: $('#cobro_comprobante').val(),
             Observaciones: $('#cobro_observaciones').val()
         },
         fechaVenta: new Date().toISOString()
     };
-
+    const idVenta = 'VENTA' + Date.now();
+    venta.IdVenta = idVenta;
     ventas.push(venta);
     localStorage.setItem("ventas", JSON.stringify(ventas));
 
-    // Marcar como vendida
+    // Marcar propiedad como vendida
     const idx = propiedades.findIndex(p => p.IdPropiedad === idProp);
     if (idx !== -1) {
         propiedades[idx].estado = "3";
@@ -474,9 +456,11 @@ function confirmarVenta() {
 
     abrirComprobante(venta);
 
+    // Mostrar modal y redirigir
     new bootstrap.Modal(document.getElementById('modalVentaConfirmada')).show();
     window.location.href = "/Front/_ListaPropiedades.html";
 }
+
 
 function abrirComprobante(venta) {
     const win = window.open('', '_blank');
@@ -498,8 +482,8 @@ function abrirComprobante(venta) {
             <div class="seccion">
                 <h4>Propiedad</h4>
                 <p><strong>Descripción:</strong> ${venta.propiedad.descripcionCorta}</p>
-                <p><strong>Dirección:</strong> ${venta.domicilio?.Calle || ''} ${venta.domicilio?.Altura || ''}, ${venta.domicilio?.Barrio || ''}, ${venta.domicilio?.Localidad}, ${venta.domicilio?.Provincia}</p>
-                <p><strong>Precio:</strong> U$S${Number(venta.propiedad.precio).toLocaleString()}</p>
+                <p><strong>Dirección:</strong> ${venta.domicilio?.Calle || ''} ${venta.domicilio?.Altura || ''}, ${venta.domicilio?.Barrio || ''}, ${venta.domicilio?.Localidad || ''}, ${venta.domicilio?.Provincia || ''}</p>
+                <p><strong>Precio base:</strong> U$S${Number(venta.cobro.Subtotal).toLocaleString()}</p>
             </div>
 
             <div class="seccion">
@@ -515,9 +499,12 @@ function abrirComprobante(venta) {
                 <h4>Datos de Cobro</h4>
                 <p><strong>Medio:</strong> ${venta.cobro.Medio}</p>
                 <p><strong>Fecha:</strong> ${venta.cobro.Fecha}</p>
-                <p><strong>Monto:</strong> U$S${Number(venta.cobro.Monto).toLocaleString()}</p>
-                <p><strong>Banco:</strong> ${venta.cobro.Banco}</p>
-                <p><strong>Comprobante:</strong> ${venta.cobro.Comprobante}</p>
+                <p><strong>% Comisión:</strong> ${venta.cobro.Comision}%</p>
+                <p><strong>Total a cobrar:</strong> U$S${Number(venta.cobro.Monto).toLocaleString()}</p>
+                ${venta.cobro.Medio === 'transferencia' ? `
+                    <p><strong>Banco:</strong> ${venta.cobro.Banco}</p>
+                    <p><strong>N° Comprobante:</strong> ${venta.cobro.Comprobante}</p>
+                ` : ''}
                 <p><strong>Observaciones:</strong> ${venta.cobro.Observaciones}</p>
             </div>
 
@@ -535,6 +522,7 @@ function abrirComprobante(venta) {
     win.document.close();
 }
 
+
 function redirigirListado() {
     const modal = bootstrap.Modal.getInstance(document.getElementById('modalVentaConfirmada'));
     modal.hide();
@@ -545,4 +533,54 @@ function cerrarModalYVolverAlInicio() {
     const modal = bootstrap.Modal.getInstance(document.getElementById('modalCargado'));
     modal.hide();
     irAlTab('propiedad-tab');
+}
+
+function validarPropiedad() {
+    var valido = true;
+
+    if ($('#descripcion_corta').val().trim() === '') {
+        marcarInvalido('#descripcion_corta');
+        valido = false;
+    }
+
+    return valido;
+
+}
+
+function marcarInvalido(selector) {
+    const $el = $(selector);
+    $el.addClass('is-invalid');
+
+    // Buscar el mensaje sin importar el nivel
+    const feedback = $el.closest('.mb-3').find('.invalid-feedback');
+    if (feedback.length) {
+        feedback.css('display', 'block');
+    }
+}
+
+function iniciarVenta(idPropiedad) {
+    const propiedades = JSON.parse(localStorage.getItem("propiedadData")) || [];
+    const prop = propiedades.find(p => p.IdPropiedad === idPropiedad);
+
+    if (!prop) return;
+
+    if (prop.estado === "3") {
+        // Mostrar modal de ya vendida
+        $('#modalYaVendida').data('id', idPropiedad).modal('show');
+    } else {
+        localStorage.setItem("propiedadParaVenta", idPropiedad);
+        window.location.href = "/Front/NuevaVenta.html";
+    }
+}
+
+function reimprimirComprobante() {
+    const id = $('#modalYaVendida').data('id');
+    const ventas = JSON.parse(localStorage.getItem("ventas")) || [];
+    const venta = ventas.find(v => v.propiedad.IdPropiedad === id);
+
+    if (venta) {
+        abrirComprobante(venta);
+    }
+
+    $('#modalYaVendida').modal('hide');
 }
