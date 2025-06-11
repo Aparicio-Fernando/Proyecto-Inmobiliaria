@@ -362,7 +362,6 @@ function confirmarVenta() {
 
     const prop = propiedades.find(p => p.IdPropiedad === idProp);
     const dom = domicilios.find(d => d.IdPropiedad === idProp);
-
     if (!prop) return;
 
     // Limpiar errores anteriores
@@ -371,55 +370,46 @@ function confirmarVenta() {
 
     let valido = true;
 
-    // Validar campos requeridos de cliente
+    // Validar cliente
     $('#cliente_apellido, #cliente_nombre, #cliente_dni, #cliente_cuil, #cliente_telefono, #cliente_email').each(function () {
-        if ($(this).val().trim() === "") {
-            $(this).addClass('error');
-            $(this).after('<div class="invalid-feedback">Campo obligatorio</div>');
+        if (!$(this).val().trim()) {
+            $(this).addClass('error').after('<div class="invalid-feedback">Campo obligatorio</div>');
             valido = false;
         }
     });
 
-    // Validar campos requeridos de cobro
-    $('#cobro_medio, #cobro_fecha').each(function () {
-        if ($(this).val().trim() === "") {
-            $(this).addClass('error');
-            $(this).after('<div class="invalid-feedback">Campo obligatorio</div>');
-            valido = false;
-        }
-    });
+    // Validar fecha
+    if (!$('#cobro_fecha').val().trim()) {
+        $('#cobro_fecha').addClass('error').after('<div class="invalid-feedback">Campo obligatorio</div>');
+        valido = false;
+    }
 
-    // Validar transferencia: banco y comprobante obligatorios
-    if ($('#cobro_medio').val() === 'transferencia') {
+    // Validar bancos y comprobantes si está activo el check transferencia
+    if ($('#chk_transferencia').is(':checked')) {
         $('#cobro_banco, #cobro_comprobante').each(function () {
-            if ($(this).val().trim() === "") {
-                $(this).addClass('error');
-                $(this).after('<div class="invalid-feedback">Campo obligatorio</div>');
+            if (!$(this).val().trim()) {
+                $(this).addClass('error').after('<div class="invalid-feedback">Campo obligatorio</div>');
                 valido = false;
             }
         });
     }
 
-    if (!valido) return;
+    const subtotal = parseARNumber($('#cobro_subtotal').val());
+    const total = parseARNumber($('#cobro_total').val());
 
-    // Validar monto total >= subtotal
-    const subtotal = parseFloat($('#cobro_subtotal').val());
-    const total = parseFloat($('#cobro_total').val());
+    const $cobroTotal = $('#cobro_total');
+    $cobroTotal.removeClass('error');
+    $cobroTotal.siblings('.invalid-feedback').remove();
 
-    if (isNaN(total) || isNaN(subtotal)) {
-        $('#cobro_comision').addClass('error');
-        $('#cobro_comision').after('<div class="invalid-feedback">Total inválido</div>');
-        return;
-    }
-
-    if (total < subtotal) {
-        $('#cobro_total').addClass('error');
-        $('#cobro_total').after('<div class="invalid-feedback">El total no puede ser menor al subtotal</div>');
+    if (subtotal < total - 0.01 || subtotal > total + 0.01) {
+        $cobroTotal.addClass('error');
+        $cobroTotal.after('<div class="invalid-feedback">El total debe coincidir con el valor del subtotal</div>');
         return;
     }
 
     // Armar objeto venta
     const venta = {
+        IdVenta: 'VENTA' + Date.now(),
         propiedad: prop,
         domicilio: dom,
         cliente: {
@@ -431,23 +421,34 @@ function confirmarVenta() {
             Email: $('#cliente_email').val().trim()
         },
         cobro: {
-            Medio: $('#cobro_medio').val(),
+            Medios: {
+                efectivo: $('#chk_efectivo').is(':checked'),
+                transferencia: $('#chk_transferencia').is(':checked')
+            },
             Fecha: $('#cobro_fecha').val(),
-            Subtotal: subtotal,
-            Comision: parseFloat($('#cobro_comision').val()),
+            Cotizacion: parseARNumber($('#cotizacion_dolar').val()),
+            Subtotal: parseARNumber($('#cobro_subtotal').val()),
+            Comision: parseARNumber($('#cobro_comision').val()),
             Monto: total,
-            Banco: $('#cobro_banco').val(),
-            Comprobante: $('#cobro_comprobante').val(),
-            Observaciones: $('#cobro_observaciones').val()
+            Banco: $('#cobro_banco').val().trim() || null,
+            Comprobante: $('#cobro_comprobante').val().trim() || null,
+            Observaciones: $('#cobro_observaciones').val().trim() || '',
+            MontoPesos: {
+                efectivo: parseARNumber($('#efectivo_pesos').val()),
+                transferencia: parseARNumber($('#transferencia_pesos').val())
+            },
+            MontoDolares: {
+                efectivo: parseARNumber($('#efectivo_dolares').val()),
+                transferencia: parseARNumber($('#transferencia_dolares').val())
+            }
         },
         fechaVenta: new Date().toISOString()
     };
-    const idVenta = 'VENTA' + Date.now();
-    venta.IdVenta = idVenta;
+
+    // Guardar
     ventas.push(venta);
     localStorage.setItem("ventas", JSON.stringify(ventas));
 
-    // Marcar propiedad como vendida
     const idx = propiedades.findIndex(p => p.IdPropiedad === idProp);
     if (idx !== -1) {
         propiedades[idx].estado = "3";
@@ -462,8 +463,22 @@ function confirmarVenta() {
 }
 
 
+
 function abrirComprobante(venta) {
     const win = window.open('', '_blank');
+
+    const formatAR = (n) => {
+        const num = parseFloat(n);
+        return isNaN(num)
+            ? 'S/V'
+            : num.toLocaleString('es-AR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+    };
+
+    const safe = (v) => v ? v : 'S/V';
+
     const html = `
         <html>
         <head>
@@ -481,34 +496,46 @@ function abrirComprobante(venta) {
             
             <div class="seccion">
                 <h4>Propiedad</h4>
-                <p><strong>Descripción:</strong> ${venta.propiedad.descripcionCorta}</p>
-                <p><strong>Dirección:</strong> ${venta.domicilio?.Calle || ''} ${venta.domicilio?.Altura || ''}, ${venta.domicilio?.Barrio || ''}, ${venta.domicilio?.Localidad || ''}, ${venta.domicilio?.Provincia || ''}</p>
-                <p><strong>Precio base:</strong> U$S${Number(venta.cobro.Subtotal).toLocaleString()}</p>
+                <p><strong>Descripción:</strong> ${safe(venta.propiedad?.descripcionCorta)}</p>
+                <p><strong>Dirección:</strong> 
+                    ${safe(venta.domicilio?.Calle)} ${safe(venta.domicilio?.Altura)}, 
+                    ${safe(venta.domicilio?.Barrio)}, 
+                    ${safe(venta.domicilio?.Localidad)}, 
+                    ${safe(venta.domicilio?.Provincia)}
+                </p>
+                <p><strong>Precio base (U$S):</strong> ${formatAR(venta.propiedad?.precio)}</p>
+                <p><strong>Subtotal cobrado ($):</strong> ${formatAR(venta.cobro?.Subtotal)}</p>
             </div>
 
             <div class="seccion">
                 <h4>Cliente</h4>
-                <p><strong>Nombre:</strong> ${venta.cliente.Nombre} ${venta.cliente.Apellido}</p>
-                <p><strong>DNI:</strong> ${venta.cliente.DNI}</p>
-                <p><strong>CUIL:</strong> ${venta.cliente.CUIL}</p>
-                <p><strong>Email:</strong> ${venta.cliente.Email}</p>
-                <p><strong>Teléfono:</strong> ${venta.cliente.Telefono}</p>
+                <p><strong>Nombre:</strong> ${safe(venta.cliente?.Nombre)} ${safe(venta.cliente?.Apellido)}</p>
+                <p><strong>DNI:</strong> ${safe(venta.cliente?.DNI)}</p>
+                <p><strong>CUIL:</strong> ${safe(venta.cliente?.CUIL)}</p>
+                <p><strong>Email:</strong> ${safe(venta.cliente?.Email)}</p>
+                <p><strong>Teléfono:</strong> ${safe(venta.cliente?.Telefono)}</p>
             </div>
 
             <div class="seccion">
                 <h4>Datos de Cobro</h4>
-                <p><strong>Medio:</strong> ${venta.cobro.Medio}</p>
-                <p><strong>Fecha:</strong> ${venta.cobro.Fecha}</p>
-                <p><strong>% Comisión:</strong> ${venta.cobro.Comision}%</p>
-                <p><strong>Total a cobrar:</strong> U$S${Number(venta.cobro.Monto).toLocaleString()}</p>
-                ${venta.cobro.Medio === 'transferencia' ? `
-                    <p><strong>Banco:</strong> ${venta.cobro.Banco}</p>
-                    <p><strong>N° Comprobante:</strong> ${venta.cobro.Comprobante}</p>
-                ` : ''}
-                <p><strong>Observaciones:</strong> ${venta.cobro.Observaciones}</p>
+                <p><strong>Cotización dólar utilizada:</strong> ${formatAR(venta.cobro?.Cotizacion)}</p>
+                <p><strong>Medios de pago:</strong> ${[
+            venta.cobro?.Medios?.efectivo ? 'Efectivo' : '',
+            venta.cobro?.Medios?.transferencia ? 'Transferencia' : ''
+        ].filter(Boolean).join(' y ') || 'S/V'}</p>
+                <p><strong>Fecha:</strong> ${venta.cobro?.Fecha && !isNaN(new Date(venta.cobro.Fecha))
+            ? new Date(venta.cobro.Fecha).toLocaleDateString('es-AR')
+            : 'S/V'
+        }</p>
+                <p><strong>Comisión(%):</strong> ${venta.cobro?.Comision ?? 'S/V'}%</p>
+                <p><strong>Total a cobrar ($):</strong> ${formatAR(venta.cobro?.Monto)}</p>
+
+                <p><strong>Banco:</strong> ${safe(venta.cobro?.Banco)}</p>
+                <p><strong>N° Comprobante:</strong> ${safe(venta.cobro?.Comprobante)}</p>
+                <p><strong>Observaciones:</strong> ${safe(venta.cobro?.Observaciones)}</p>
             </div>
 
-            <p><em>Fecha de operación: ${new Date(venta.fechaVenta).toLocaleString()}</em></p>
+            <p><em>Fecha de operación: ${new Date(venta.fechaVenta).toLocaleString('es-AR')}</em></p>
 
             <script>
                 window.onload = function() {
@@ -518,9 +545,11 @@ function abrirComprobante(venta) {
         </body>
         </html>
     `;
+
     win.document.write(html);
     win.document.close();
 }
+
 
 
 function redirigirListado() {

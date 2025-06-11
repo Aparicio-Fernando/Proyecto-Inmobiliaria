@@ -183,3 +183,21 @@ input.error ~ .invalid-feedback,
 select.error ~ .invalid-feedback {
     display: block;
 }
+propiedad-tab
+#propietario-tab{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+#propiedad-tab{
+    font-size: 20px;
+    font-weight: 500;
+}
+#venta-tab{
+    font-size: 20px;
+    font-weight: 500;
+}
+#cobro-tab{
+    font-size: 20px;
+    font-weight: 500;
+}
